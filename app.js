@@ -237,12 +237,14 @@ function time2str(time){
 app.get('/upsertDB',
   async (req,res,next) => {
     //await Course.deleteMany({})
-    for (course of courses){
-      const {subject,coursenum,section,term}=course;
+    for (course of courses) {
+      const {subject, coursenum, section, term, times} = course;
       const num = getNum(coursenum);
-      course.num=num
+      const strTimes = times2str(times)
+      course.num = num
       course.suffix = coursenum.slice(num.length)
-      await Course.findOneAndUpdate({subject,coursenum,section,term},course,{upsert:true})
+      course.strTimes = strTimes
+      await Course.findOneAndUpdate({subject, coursenum, section, term, times}, course,{upsert:true})
     }
     const num = await Course.find({}).count();
     res.send("data uploaded: "+num)
@@ -257,7 +259,7 @@ app.post('/courses/bySubject',
     const courses = await Course.find({subject:subject,independent_study:false}).sort({term:1,num:1,section:1})
     
     res.locals.courses = courses
-    res.locals.times2str = times2str
+    // res.locals.times2str = times2str
     //res.json(courses)
     res.render('courselist')
   }
@@ -269,7 +271,6 @@ app.get('/courses/show/:courseId',
     const {courseId} = req.params;
     const course = await Course.findOne({_id:courseId})
     res.locals.course = course
-    res.locals.times2str = times2str
     //res.json(course)
     res.render('course')
   }
@@ -296,7 +297,7 @@ app.post('/courses/byInst',
                .sort({term:1,num:1,section:1})
     //res.json(courses)
     res.locals.courses = courses
-    res.locals.times2str = times2str
+    // res.locals.times2str = times2str
     res.render('courselist')
   }
 )

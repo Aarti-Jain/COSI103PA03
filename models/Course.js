@@ -6,6 +6,7 @@ const Mixed = Schema.Types.Mixed;
 
 var courseSchema = Schema( {
     limit: Number,
+    strTimes: [String],
     times: Mixed,
     enrolled: Number,
     details: String,
