@@ -256,13 +256,26 @@ app.post('/courses/bySubject',
   // show list of courses in a given subject
   async (req,res,next) => {
     const {subject} = req.body;
-    const courses = await Course.find({subject:subject,independent_study:false}).sort({term:1,num:1,section:1})
+    const courses = await Course.find({subject:subject, independent_study:false}).sort({term:1, num:1, section:1})
     
     res.locals.courses = courses
     // res.locals.times2str = times2str
     //res.json(courses)
     res.render('courselist')
   }
+)
+
+app.post('/courses/byKeyword',
+    // show list of courses in a given subject
+    async (req,res,next) => {
+        const {keyword} = req.body;
+        const courses = await Course.find({name:{$regex: keyword}, independent_study:false}).sort({term:1, num:1, section:1})
+
+        res.locals.courses = courses
+        // res.locals.times2str = times2str
+        // res.json(courses)
+        res.render('courselist')
+    }
 )
 
 app.get('/courses/show/:courseId',
