@@ -243,7 +243,7 @@ app.get('/upsertDB',
       const strTimes = times2str(times)
       course.num = num
       course.suffix = coursenum.slice(num.length)
-      course.strTimes = strTimes
+      course.strTimes = strTimes //setting course.strTimes = the strTimes to set the strTimes field accordingly
       await Course.findOneAndUpdate({subject, coursenum, section, term, times}, course,{upsert:true})
     }
     const num = await Course.find({}).count();
@@ -272,7 +272,7 @@ app.post('/courses/byKeyword',
         const courses = await Course.find({name:{$regex: keyword}, independent_study:false}).sort({term:1, num:1, section:1})
 
         res.locals.courses = courses
-        // res.locals.times2str = times2str
+        // res.locals.times2str = times2str //commenting out the res locals times2str
         // res.json(courses)
         res.render('courselist')
     }
@@ -310,7 +310,7 @@ app.post('/courses/byInst',
                .sort({term:1,num:1,section:1})
     //res.json(courses)
     res.locals.courses = courses
-    // res.locals.times2str = times2str
+    // res.locals.times2str = times2str //commenting out the res locals times2str
     res.render('courselist')
   }
 )

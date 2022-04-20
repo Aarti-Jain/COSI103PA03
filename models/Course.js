@@ -6,7 +6,7 @@ const Mixed = Schema.Types.Mixed;
 
 var courseSchema = Schema( {
     limit: Number,
-    strTimes: [String],
+    strTimes: [String], //modifying the model in order to include strTimes field which will contain list of Strings
     times: Mixed,
     enrolled: Number,
     details: String,
