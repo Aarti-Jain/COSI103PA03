@@ -133,7 +133,7 @@ app.get('/todo',
   }
   )
 
-  app.post('/todo/add',
+  app.post('/todo/add', //creating a app post route which will get the keyword passed in from part 4 and then send to courselist.ejs to be reported back to the user 
   isLoggedIn,
   async (req,res,next) => {
     try{
