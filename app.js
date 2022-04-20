@@ -270,7 +270,7 @@ app.post('/courses/byKeyword',
     async (req,res,next) => {
         const {keyword} = req.body;
         const courses = await Course.find({name:{$regex: keyword}, independent_study:false}).sort({term:1, num:1, section:1})
-
+        //searches courses for one with the keyword in the name, also can't be an independent study
         res.locals.courses = courses
         // res.locals.times2str = times2str
         // res.json(courses)
