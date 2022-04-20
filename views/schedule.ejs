@@ -3,13 +3,12 @@
     <% for (course of courses){%>
         <div class="p-3 m-3 border border-primary bg-light">
             <a href="/schedule/remove/<%= course._id %>">X</a>
-            <%= course.code%>
             <%= course['subject'] %>
             <%= course.coursenum %>
-            <%= course.name %>
-            <%= course.term %>
-            <%= course.enrolled%>
-            <%= course.status_text%>
+            <%= course.name %> 
+            <%= course.term %> <br>
+            Enrolled: <%= course.enrolled%> 
+            Status: <%= course.status_text%> 
         </div>
     <% } %>
 </div>
