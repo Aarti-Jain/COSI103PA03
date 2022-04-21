@@ -259,8 +259,6 @@ app.post('/courses/bySubject',
     const courses = await Course.find({subject:subject, independent_study:false}).sort({term:1, num:1, section:1})
     
     res.locals.courses = courses
-    // res.locals.times2str = times2str
-    //res.json(courses)
     res.render('courselist')
   }
 )
@@ -272,8 +270,6 @@ app.post('/courses/byKeyword',
         const courses = await Course.find({name:{$regex: keyword}, independent_study:false}).sort({term:1, num:1, section:1})
         //searches courses for one with the keyword in the name, also can't be an independent study
         res.locals.courses = courses
-        // res.locals.times2str = times2str //commenting out the res locals times2str
-        // res.json(courses)
         res.render('courselist')
     }
 )
@@ -284,7 +280,6 @@ app.get('/courses/show/:courseId',
     const {courseId} = req.params;
     const course = await Course.findOne({_id:courseId})
     res.locals.course = course
-    //res.json(course)
     res.render('course')
   }
 )
