@@ -240,10 +240,10 @@ app.get('/upsertDB',
     for (course of courses) {
       const {subject, coursenum, section, term, times} = course;
       const num = getNum(coursenum);
-      const strTimes = times2str(times)
+      // const strTimes = times2str(times) //Hello!!!!!!!!!!!!!!!
       course.num = num
       course.suffix = coursenum.slice(num.length)
-      course.strTimes = strTimes //setting course.strTimes = the strTimes to set the strTimes field accordingly
+      course.strTimes = times.split("\n") //setting course.strTimes = the strTimes to set the strTimes field accordingly
       await Course.findOneAndUpdate({subject, coursenum, section, term, times}, course,{upsert:true})
     }
     const num = await Course.find({}).count();
